@@ -2,7 +2,7 @@ import requests
 import json
 from pyyoutube import Api
  
-key = "AIzaSyAvkN6wAkNOaGjXaD_JWmOOLyD-8TrlxEU"
+key = "AIzaSyAvkN6wAkNOaGjXaD_JWmOOLyD-8TrlzEU"
 api = Api(api_key=key)
  
 query = "'Mission Impossible'"
@@ -25,5 +25,5 @@ for id_ in [x.id.videoId for x in video.items]:
     for item in data['items']:
         s += int(item['snippet']['topLevelComment']['snippet']['likeCount'])
  
-with open('/home/mike/airflow_plus_mlflow_pipeline/datasets/data.csv', 'a') as f:
+with open('/home/diza/airflow_plus_mlflow_pipeline/datasets/data.csv', 'a') as f:
     f.write("{}\n".format(s))

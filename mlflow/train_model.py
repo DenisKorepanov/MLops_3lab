@@ -9,7 +9,7 @@ from mlflow.tracking import MlflowClient
 mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("train_model")
  
-df = pd.read_csv('/home/mike/airflow_plus_mlflow_pipeline/datasets/data_train.csv', header=None)
+df = pd.read_csv('/home/diza/airflow_plus_mlflow_pipeline/datasets/data_train.csv', header=None)
 df.columns = ['id', 'counts']
 model = LinearRegression()
  
@@ -17,11 +17,11 @@ with mlflow.start_run():
     mlflow.sklearn.log_model(model,
                              artifact_path="lr",
                              registered_model_name="lr")
-    mlflow.log_artifact(local_path="/home/mike/airflow_plus_mlflow_pipeline/scripts/train_model.py",
+    mlflow.log_artifact(local_path="/home/diza/airflow_plus_mlflow_pipeline/scripts/train_model.py",
                         artifact_path="train_model code")
     mlflow.end_run()
  
 model.fit(df['id'].values.reshape(-1,1), df['counts'])
  
-with open('/home/mike/airflow_plus_mlflow_pipeline/models/data.pickle', 'wb') as f:
+with open('/home/diza/airflow_plus_mlflow_pipeline/models/data.pickle', 'wb') as f:
     pickle.dump(model, f)

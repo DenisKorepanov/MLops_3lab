@@ -6,11 +6,11 @@ import os
 import mlflow
 from mlflow.tracking import MlflowClient
  
-os.environ["MLFLOW_REGISTRY_URI"] = "/home/mike/airflow_plus_mlflow_pipeline/mlflow/"
+os.environ["MLFLOW_REGISTRY_URI"] = "/home/diza/airflow_plus_mlflow_pipeline/mlflow/"
 mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("get_data")
  
-key = "AIzaSyAvkN6wAkNOaGjXaD_JWmOOLyD-8TrlxEU"
+key = "AIzaSyAvkN6wAkNOaGjXaD_JWmOOLyD-8TrlzEU"
 api = Api(api_key=key)
 query = "'Mission Impossible'"
 video = api.search_by_keywords(q=query, search_type=["video"], count=10, limit=30)
@@ -31,9 +31,9 @@ with mlflow.start_run():
         data = json.loads(content)
         for item in data['items']:
             s += int(item['snippet']['topLevelComment']['snippet']['likeCount'])
-    mlflow.log_artifact(local_path="/home/mike/airflow_plus_mlflow_pipeline/scripts/get_data.py",
+    mlflow.log_artifact(local_path="/home/diza/airflow_plus_mlflow_pipeline/scripts/get_data.py",
                         artifact_path="get_data code")
     mlflow.end_run()
  
-with open('/home/mike/airflow_plus_mlflow_pipeline/datasets/data.csv', 'a') as f:
+with open('/home/diza/airflow_plus_mlflow_pipeline/datasets/data.csv', 'a') as f:
     f.write("{}\n".format(s))
